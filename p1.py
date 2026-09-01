@@ -30,11 +30,11 @@ def main():
             print(f"Incorrect value, please try input a number from 1 to {len(services)}")
             continue
         if ch-1 in range(len(services)):
-            functions[ch]()
-        if ch == 6:
-            break         
+            functions[ch]()         
         else:
             print(f"please try input a number from 1 to {len(services)}")
+        if ch == 6:
+            break    
 
 
 def add_book():
@@ -60,10 +60,12 @@ def add_book():
         else:
             break
 
+    rating = None
     while True:
         user_rate = input("Your rating from 1-10 or skip it by click enter: ")
         if user_rate == "":
-            continue
+            rating = None
+            break
         try:
             rating = float(user_rate)
         except ValueError:
