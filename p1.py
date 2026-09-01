@@ -185,38 +185,27 @@ def Statistics():
 
     with open("book.csv", "r", newline="") as file:
         reader = list(csv.reader(file))
-
         for n in reader:
-            if len(n) < 5:
-                continue
-
             b_oo.append(n[0])
             a_u.append(n[1])
-            p_g.append(int(n[2]))
-
-            if n[3].strip() != "":
-                try:
-                    t_r.append(float(n[3]))
-                except ValueError:
-                    pass
-
+            p_g.append(n[2])
+            if n[3] != "None":
+                t_r.append(n[3])
             if n[4] == "1":
                 con_1.append(n[4])
             elif n[4] == "2":
                 con_2.append(n[4])
             else:
-                con_3.append(n[4])
-
+                con_3.append(n[4]) 
     print(f"Book:{len(b_oo)}\nAuthors:{len(a_u)}")
     print(f"Books you finish from read them:{len(con_1)}")
     print(f"Books you still read them:{len(con_2)}")
     print(f"Books you haven't finished yet:{len(con_3)}")
-    print(f"Total pages:{sum(p_g)}")
-
-    if not t_r:
+    print(f"Total pages:{sum(int(n)for n in p_g)}")
+    if len(t_r) == 0:
         print("Average rating: 0.00")
     else:
-        print(f"Average rating: {(sum(t_r) / len(t_r)):.2f}")
+        print(f"{(sum(float(i)for i in t_r)) / len(t_r):.2f}") 
             
             
 def shutdown():
