@@ -12,11 +12,11 @@ def main():
     services = ["Add Book", "Change reading status", "Show all the books", "Search for book", "Statistics", "or SHUT DOWN THE PROGRAM"]
     functions = {
          1: add_book,
-         2: cha_stat,
-         3: sh_all_bks,
-         4: ser_f_bks,
-         5: stis,
-        6: sh_d_pro
+         2: change_status,
+         3: show_all_books,
+         4: search_for_books,
+         5: Statistics,
+        6: shutdown
     }
 
     print("Welcome to Book Collection Manager\nOur services: ")
@@ -31,7 +31,8 @@ def main():
             continue
         if ch-1 in range(len(services)):
             functions[ch]()
-            break
+        if ch == 6:
+            break         
         else:
             print(f"please try input a number from 1 to {len(services)}")
 
@@ -94,7 +95,7 @@ def add_book():
         write.writerow([book.title,book.author,book.pages,book.rating,book.status])
         print("WE SAVE THEM")
 
-def cha_stat():
+def change_status():
     se = input("Search for a book to update: ").strip()
 
     with open("book.csv", "r", newline="") as file:
@@ -124,7 +125,7 @@ def cha_stat():
 
     print("Book not found.")
 
-def sh_all_bks():
+def show_all_books():
     ma = []
     with open("book.csv","r",newline="") as file:
         reader = list(csv.reader(file))
@@ -156,7 +157,7 @@ def sh_all_bks():
     else:
         print("We finish here!!!")                    
                 
-def ser_f_bks():
+def search_for_books():
     
     se = input("Search for a book: ")
     with open("book.csv","r",newline="") as file:
@@ -171,7 +172,7 @@ def ser_f_bks():
         else:
                 print("You haven't read it yet")    
 
-def stis():
+def Statistics():
     b_oo = []
     a_u =[]
     con_1 = []
@@ -198,17 +199,16 @@ def stis():
     print(f"Books you still read them:{len(con_2)}")
     print(f"Books you haven't finished yet:{len(con_3)}")
     print(f"Total pages:{sum(int(n)for n in p_g)}")
-    print(f"{(sum(float(i)for i in t_r)) / len(t_r):.2f}") 
+    if len(t_r) == 0:
+        print("Average rating: 0.00")
+    else:
+        print(f"{(sum(float(i)for i in t_r)) / len(t_r):.2f}") 
             
             
-def sh_d_pro():
+def shutdown():
     print("YOU OUT!")
-    return       
-
-
-
-
-
+    return 
+      
 
 
 
