@@ -160,24 +160,19 @@ def show_all_books():
         print("We finish here!!!")                    
                 
 def search_for_books():
-    se = input("Search for a book: ").strip()
-    found = False
-
-    with open("book.csv", "r", newline="") as file:
+    
+    se = input("Search for a book: ")
+    with open("book.csv","r",newline="") as file:
         reader = list(csv.reader(file))
         for n in reader:
-            if len(n) >= 5 and n[0].strip().lower() == se.lower():
-                found = True
+            if n[0] == se:
                 print(f"The book: {n[0]} by {n[1]}\nThe pages of book:{n[2]},(rating:{n[3]})")
-                if n[4] == "1":
-                    print("You finish read it")
-                elif n[4] == "2":
-                    print("You still read it")
-                else:
-                    print("You haven't read it yet")
-
-    if not found:
-        print("Book not found.")
+            if n[4] == "1":
+                print("You finish read it")
+            elif n[4] == "2":
+                print("You still read it")
+            else:
+                print("You haven't read it yet")    
 
 def Statistics():
     b_oo = []
